@@ -26,7 +26,7 @@ def dbs():
 
 @app.route("/llama",methods=["GET","POST"])
 def llama():
-    
+    q = request.form.get("q")
     return(render_template("llama.html"))
 
 @app.route("/llama_reply",methods=["GET","POST"])
