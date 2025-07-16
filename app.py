@@ -78,6 +78,11 @@ def prediction():
 
     return(render_template("prediction.html",r=pred))
 
+@app.route("/telegram",methods=["GET","POST"])
+def telegram():
+    
+    return(render_template("telegram.html"))
+
 if __name__ == "__main__":
     app.run()
     
