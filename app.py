@@ -3,7 +3,8 @@ import joblib
 from groq import Groq
 
 import os
-TELEGRAM_BOT_TOKEN = os.getenv("7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs")
+os.environ['GROQ_API_KEY'] = os.getenv('groq')
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")   
 # for cloud 
 
 app = Flask(__name__)
