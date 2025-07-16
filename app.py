@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import joblib
 from groq import Groq
+import requests
 
 import os
 os.environ['GROQ_API_KEY'] = os.getenv('groq')
@@ -22,7 +23,7 @@ def main():
 
 @app.route("/dbs",methods=["GET","POST"])
 def dbs():
-    
+    q = request.form.get("q")
     return(render_template("dbs.html"))
 
 @app.route("/llama",methods=["GET","POST"])
@@ -48,7 +49,7 @@ def llama_reply():
 
 @app.route("/deepseek",methods=["GET","POST"])
 def deepseek():
-    
+    q = request.form.get("q")
     return(render_template("deepseek.html"))
 
 @app.route("/deepseek_reply",methods=["GET","POST"])
@@ -93,7 +94,7 @@ def telegram():
 
     if webhook_response.status_code == 200:
         # set status message
-        status = "The telegram bot is running. Please check with the telegram bot. @ybrownbeanbot"
+        status = "The telegram bot is running. Please check with the telegram bot. @brownbeanbot"
     else:
         status = "Failed to start the telegram bot. Please check the logs."
     
@@ -133,5 +134,3 @@ def webhook():
 if __name__ == "__main__":
     app.run()
 
-if __name__ == "__main__":
-    app.run()
