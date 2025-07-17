@@ -8,7 +8,6 @@
     <div class="container">
     <h2>DEEPSEEK chatbot via groq</h2>
         <form action="/deepseek_reply" method="post">
-            <p>Please enter your query</p>
             <input type="text" name="q">
             <input type="submit" value="Enter">
         </form>
