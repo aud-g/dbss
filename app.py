@@ -20,15 +20,9 @@ def main():
     # db
     return(render_template("main.html"))
 
-
-@app.route("/dbs",methods=["GET","POST"])
-def dbs():
-    q = request.form.get("q")
-    return(render_template("dbs.html"))
-
 @app.route("/llama",methods=["GET","POST"])
 def llama():
-    q = request.form.get("q")
+   
     return(render_template("llama.html"))
 
 @app.route("/llama_reply",methods=["GET","POST"])
@@ -49,7 +43,7 @@ def llama_reply():
 
 @app.route("/deepseek",methods=["GET","POST"])
 def deepseek():
-    q = request.form.get("q")
+    
     return(render_template("deepseek.html"))
 
 @app.route("/deepseek_reply",methods=["GET","POST"])
@@ -67,6 +61,11 @@ def deepseek_reply():
         ]
     )
     return(render_template("deepseek_reply.html",r=completion_ds.choices[0].message.content))
+
+@app.route("/dbs",methods=["GET","POST"])
+def dbs():
+
+    return(render_template("dbs.html"))
     
 @app.route("/prediction",methods=["GET","POST"])
 def prediction():
@@ -98,7 +97,24 @@ def telegram():
     else:
         status = "Failed to start the telegram bot. Please check the logs."
     
-    return(render_template("telegram.html", status=status))
+    return(render_template("telegram.html", r=status))
+
+@app.route("/stop_telegram",methods=["GET","POST"])
+def stop_telegram():
+    domain_url = "https://dbss-1-ai0s.onrender.com"
+
+    # The following line is used to delete the existing webhook URL for the Telegram bot
+    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
+    webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
+
+    # Set the webhook URL for the Telegram bot
+        if webhook_response.status_code == 200:
+        # set status message
+        status = "The telegram bot has stop. 
+    else:
+        status = "Failed to stop the telegram bot."
+
+    return(render_template("telegram.html", r=status))
 
 @app.route("/webhook",methods=["GET","POST"])
 def webhook():
