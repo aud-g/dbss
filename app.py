@@ -116,6 +116,43 @@ def stop_telegram():
 
     return(render_template("telegram.html", r=status))
 
+@app.route("/user_log",methods=["GET","POST"])
+def user_log():
+    domain_url = "https://dbss-1-ai0s.onrender.com"
+
+    # The following line is used to delete the existing webhook URL for the Telegram bot
+    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
+    requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
+
+    # Set the webhook URL for the Telegram bot
+    set_webhook_url = f"https://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/setWebhook?url={domain_url}/webhook"
+    webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
+
+    if webhook_response.status_code == 200:
+        # set status message
+        status = "The telegram bot is running. Please check with the telegram bot. @brownbeanbot"
+    else:
+        status = "Failed to start the telegram bot. Please check the logs."
+    
+    return(render_template("telegram.html", r=status))
+
+@app.route("/delete_log",methods=["GET","POST"])
+def delete_log():
+    domain_url = "https://dbss-1-ai0s.onrender.com"
+
+    # The following line is used to delete the existing webhook URL for the Telegram bot
+    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
+    webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
+
+    # Set the webhook URL for the Telegram bot
+        if webhook_response.status_code == 200:
+        # set status message
+        status = "The telegram bot has stop. 
+    else:
+        status = "Failed to stop the telegram bot."
+
+    return(render_template("telegram.html", r=status))
+
 @app.route("/webhook",methods=["GET","POST"])
 def webhook():
 
