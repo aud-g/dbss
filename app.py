@@ -182,6 +182,11 @@ def webhook():
             "chat_id": chat_id,
             "text": response_message
         })
+
+@app.route('/sepia', methods=['GET', 'POST'])
+def sepia():
+    return render_template("sepia_hf.html")
+    
     return('ok', 200)
 
 if __name__ == "__main__":
