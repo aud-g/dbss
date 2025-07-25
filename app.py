@@ -145,6 +145,7 @@ def webhook():
             "chat_id": chat_id,
             "text": response_message
         })
+    return('ok', 200)
 
 @app.route("/user_log",methods=["GET","POST"])
 def user_log():
