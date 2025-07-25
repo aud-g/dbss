@@ -88,7 +88,7 @@ def telegram():
     domain_url = "https://dbss-1-ai0s.onrender.com"
 
     # The following line is used to delete the existing webhook URL for the Telegram bot
-    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
+    delete_workbook_url = f"http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
     requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
 
     # Set the webhook URL for the Telegram bot
@@ -108,11 +108,11 @@ def stop_telegram():
     domain_url = "https://dbss-1-ai0s.onrender.com"
 
     # The following line is used to delete the existing webhook URL for the Telegram bot
-    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
+    delete_workbook_url = f"http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
     webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
 
     # Set the webhook URL for the Telegram bot
-        if webhook_response.status_code == 200:
+    if webhook_response.status_code == 200:
         # set status message
         status = "The telegram bot has stop. 
     else:
