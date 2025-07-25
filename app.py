@@ -118,7 +118,7 @@ def stop_telegram():
     else:
         status = "Failed to stop the telegram bot."
 
-    return(render_template("telegram.html", r=status))
+    return(render_template("stop_telegram.html", r=status))
 
 @app.route("/webhook",methods=["GET","POST"])
 def webhook():
