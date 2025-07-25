@@ -114,7 +114,7 @@ def stop_telegram():
     # Set the webhook URL for the Telegram bot
     if webhook_response.status_code == 200:
         # set status message
-        status = "The telegram bot has stop. 
+        status = "The telegram bot has stop."
     else:
         status = "Failed to stop the telegram bot."
 
