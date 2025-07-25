@@ -169,12 +169,12 @@ def user_log():
 def delete_log():
     conn = sqlite3.connect('user.db')
     c = conn.cursor()
-    c.execute('DELETE FROM user',);
+    c.execute('DELETE FROM user',)
     conn.commit()
     c.close()
     conn.close()
 
-    return(render_template("delete_log.html", message=user log deleted successfully))
+    return render_template("delete_log.html", message="user log deleted successfully.")
 
 @app.route('/sepia', methods=['GET', 'POST'])
 def sepia():
