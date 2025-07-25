@@ -4,6 +4,10 @@ from groq import Groq
 import requests
 
 import os
+
+import sqlite3
+import datetime
+
 os.environ['GROQ_API_KEY'] = os.getenv('groq')
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")   
 # for cloud 
