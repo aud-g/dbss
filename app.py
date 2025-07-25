@@ -116,37 +116,6 @@ def stop_telegram():
 
     return(render_template("telegram.html", r=status))
 
-@app.route("/user_log",methods=["GET","POST"])
-def user_log():
-    conn = sqlite3.connect('user.db')
-    c = conn.cursor()
-    c.execute('''select * from user''')
-    r=""
-    for row in c:
-    print(row)
-    r = r + str(row)
-    c.close()
-    conn.close()
-    
-    return(render_template("user_log.html", r=status))
-
-@app.route("/delete_log",methods=["GET","POST"])
-def delete_log():
-    domain_url = "https://dbss-1-ai0s.onrender.com"
-
-    # The following line is used to delete the existing webhook URL for the Telegram bot
-    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
-    webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
-
-    # Set the webhook URL for the Telegram bot
-        if webhook_response.status_code == 200:
-        # set status message
-        status = "The telegram bot has stop. 
-    else:
-        status = "Failed to stop the telegram bot."
-
-    return(render_template("telegram.html", r=status))
-
 @app.route("/webhook",methods=["GET","POST"])
 def webhook():
 
@@ -176,6 +145,31 @@ def webhook():
             "chat_id": chat_id,
             "text": response_message
         })
+
+@app.route("/user_log",methods=["GET","POST"])
+def user_log():
+    conn = sqlite3.connect('user.db')
+    c = conn.cursor()
+    c.execute('''select * from user''')
+    r=""
+    for row in c:
+    print(row)
+    r = r + str(row)
+    c.close()
+    conn.close()
+    
+    return(render_template("user_log.html", r=r))
+
+@app.route("/delete_log",methods=["GET","POST"])
+def delete_log():
+    conn = sqlite3.connect('user.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM user',);
+    conn.commit()
+    c.close()
+    conn.close()
+
+    return(render_template("delete_log.html", message=user log deleted successfully))
 
 @app.route('/sepia', methods=['GET', 'POST'])
 def sepia():
