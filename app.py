@@ -118,23 +118,17 @@ def stop_telegram():
 
 @app.route("/user_log",methods=["GET","POST"])
 def user_log():
-    domain_url = "https://dbss-1-ai0s.onrender.com"
-
-    # The following line is used to delete the existing webhook URL for the Telegram bot
-    delete_workbook_url = "http://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/deleteWebhook"
-    requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
-
-    # Set the webhook URL for the Telegram bot
-    set_webhook_url = f"https://api.telegram.org/bot{7456173671:AAGJDt2dGNyn9xTGWrQDzxPL84jp4IBzvSs}/setWebhook?url={domain_url}/webhook"
-    webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
-
-    if webhook_response.status_code == 200:
-        # set status message
-        status = "The telegram bot is running. Please check with the telegram bot. @brownbeanbot"
-    else:
-        status = "Failed to start the telegram bot. Please check the logs."
+    conn = sqlite3.connect('user.db')
+    c = conn.cursor()
+    c.execute('''select * from user''')
+    r=""
+    for row in c:
+    print(row)
+    r = r + str(row)
+    c.close()
+    conn.close()
     
-    return(render_template("telegram.html", r=status))
+    return(render_template("user_log.html", r=status))
 
 @app.route("/delete_log",methods=["GET","POST"])
 def delete_log():
